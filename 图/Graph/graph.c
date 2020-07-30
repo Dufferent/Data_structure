@@ -221,7 +221,23 @@ void DFS(GNode obj,int vertex)
 
 void WFS(GNode obj,int vertex)
 {
-
+    int remain[MAX_VERTEX] = {0};
+    int ct = 0;
+    if(vertex < obj->vnums)//assert
+    {
+        //printf("->%d",vertex);//访问地点
+        for(int i=0;i<obj->vnums;i++)
+        {
+            if(obj->table[vertex][i] == 1)
+            {
+                printf("%d->%d\r\n",vertex,i);//访问地点
+                remain[ct] = i;
+                ct++;
+            }
+        }
+        for(int i=0;i<=ct-1;i++)
+            WFS(obj,remain[i]);
+    }
 }
 
 

@@ -3,8 +3,8 @@
 
 /* data type */
 #define ELEMENT_TYPE int 
-#define MAX_VERTEX   4
-#define MAX_EDAGE    8
+#define MAX_VERTEX   6
+#define MAX_EDAGE    30
 /* data structure */
 typedef struct edage{
     ELEMENT_TYPE node_list[MAX_VERTEX][MAX_VERTEX];//表示两顶点间的边,有边为1，否则0
@@ -24,10 +24,9 @@ typedef struct{
     unsigned int enums;
 }Graph,*GNode;
 
-
-
 /* op */
 int Graph_Init(GNode *obj);
 void Vist_VList(VNode obj);
 void DFS(GNode obj,int vertex);
+void WFS(GNode obj,int vertex);
 #endif

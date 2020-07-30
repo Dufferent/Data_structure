@@ -5,9 +5,15 @@
 int main(void)
 {
     GNode my_graph;
+    ELEMENT_TYPE Start_addr;
 
     Graph_Init(&my_graph);
-    DFS(my_graph,0);
+    printf("Please input Start place!\r\n");
+    scanf("%d",&Start_addr);
+    getchar();
+    DFS(my_graph,Start_addr);
+    printf("\r\n");
+    WFS(my_graph,Start_addr);
     printf("\r\n");
     return 0;
 }
