@@ -29,4 +29,5 @@ typedef struct{
 /* op */
 int Graph_Init(GNode *obj);
 void Vist_VList(VNode obj);
+void DFS(GNode obj,int vertex);
 #endif

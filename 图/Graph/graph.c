@@ -68,8 +68,8 @@ int Vertex_Init(VNode *obj,unsigned int vnums,ELEMENT_TYPE *str)
 {
     VNode op;
     op = (*obj);
-    if(op == NULL)
-        op = (VNode)malloc(sizeof(struct vertex));
+    if(*obj == NULL)
+        *obj = (VNode)malloc(sizeof(struct vertex));
     op->node = str[0];
     op->next = NULL;
 
@@ -86,15 +86,15 @@ int Edage_Init(ENode *obj,unsigned int enums,int *Vs,int *Ve)
 {
     ENode op;
     op = *obj;
-    if(op == NULL)
+    if(*obj == NULL)
     {
-        op = (ENode)malloc(sizeof(struct edage));
+        *obj = (ENode)malloc(sizeof(struct edage));
         for(int i=0;i<MAX_VERTEX;i++)
         for(int j=0;j<MAX_VERTEX;j++)
         {
-            op->node_list[i][j] = 0;
+            (*obj)->node_list[i][j] = 0;
         }
-        op->next = NULL;
+        (*obj)->next = NULL;
     }
 
     for(int i=0;i<enums;i++)
@@ -149,8 +149,12 @@ int Graph_Init(GNode *obj)
 {
     /* op ptr */
     GNode op;
+    /* 传入对象必须被分配空间，不能用操作指针代替分配 */
+    /* 传入对象必须被分配空间，不能用操作指针代替分配 */
+    /* 传入对象必须被分配空间，不能用操作指针代替分配 */
+    *obj = (GNode)malloc(sizeof(Graph));
     op = (*obj);
-    op = (GNode)malloc(sizeof(Graph));
+
 
     unsigned int vnums,enums;
     ELEMENT_TYPE getstr[MAX_VERTEX+1] = {0};//MAX_VERTEX
@@ -167,9 +171,9 @@ int Graph_Init(GNode *obj)
     op->vnums = vnums;
     op->v == NULL;
     op->e == NULL;
-    /* 结构体中申明了结构体指针时要单独给于空间 */
-    /* 结构体中申明了结构体指针时要单独给于空间 */
-    /* 结构体中申明了结构体指针时要单独给于空间 */
+    /* 结构体通过函数对结构体本身和成员变量分配空间时要先单独给于成员变量指针空间 */
+    /* 结构体通过函数对结构体本身和成员变量分配空间时要先单独给于成员变量指针空间 */
+    /* 结构体通过函数对结构体本身和成员变量分配空间时要先单独给于成员变量指针空间 */
     op->v = (VNode)malloc(sizeof(struct vertex)/**vnums*/);
     op->e = (ENode)malloc(sizeof(struct edage)/**enums*/);
 
@@ -195,12 +199,30 @@ int Graph_Init(GNode *obj)
     Vist_Edage(op->e);
     Creat_Graph_Table(&op,op->e);
     Print_Table(op);
+
     return 0;
 }
 
+void DFS(GNode obj,int vertex)
+{
+    int i;
+    if(vertex < obj->vnums)//assert
+    {
+        printf("->%d",vertex);//访问地点
+        for(i=0;i<obj->vnums;i++)
+        {
+            if(obj->table[vertex][i] == 1)
+            {
+                DFS(obj,i);
+            }
+        }
+    }
+}
 
+void WFS(GNode obj,int vertex)
+{
 
-
+}
 
 
 
