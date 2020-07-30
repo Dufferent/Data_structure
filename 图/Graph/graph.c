@@ -208,11 +208,12 @@ void DFS(GNode obj,int vertex)
     int i;
     if(vertex < obj->vnums)//assert
     {
-        printf("->%d",vertex);//访问地点
+        //printf("->%d",vertex);//访问地点
         for(i=0;i<obj->vnums;i++)
         {
             if(obj->table[vertex][i] == 1)
             {
+                printf("%d->%d\r\n",vertex,i);//访问地点
                 DFS(obj,i);
             }
         }
