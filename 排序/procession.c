@@ -32,7 +32,7 @@ void ARRAY_SHOW(Element_Type *array)
     }
     printf("\r\n");
 }
-//3.冒泡排序
+//3.冒泡排序:O(n^2)
 void Maopao_Process(Element_Type *array)
 {
     for(int i=0;i<Get_Len(array);i++)
@@ -48,7 +48,7 @@ void Maopao_Process(Element_Type *array)
         ARRAY_SHOW(array);
     }
 }
-//4.插入排序
+//4.插入排序:O(n^3)
 void Insert_Process(Element_Type *array)
 {
     int i,j;
@@ -83,7 +83,7 @@ void Insert_Process(Element_Type *array)
 
     ARRAY_SHOW(array);
 }   
-//5.希尔排序
+//5.希尔排序:O(nlog2(n)) 当n->∞ O(n^2)
 void Swap(Element_Type *x1,Element_Type *x2)
 {
     Element_Type ts;
@@ -117,7 +117,7 @@ void Shell_Sort(Element_Type *array)
         }
     }
 }
-//6.快速排序
+//6.快速排序O(nlog2(n))
 int Quick_Sort_step(Element_Type *array,int low,int high)
 {
     //int low = 0;
@@ -166,7 +166,7 @@ void Quick_Sort(Element_Type *array,int low ,int high)
     if( (index < high) && (index+1 != high) )
         Quick_Sort(array,index+1,high);
 }
-//7.简单选择排序
+//7.简单选择排序O(n^2)
 struct Max{
     Element_Type val;
     unsigned     index;
