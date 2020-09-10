@@ -20,8 +20,8 @@ int main(void)
     my_tree = BTree_Order_Init(&my_tree);
     BTree_Order_Vist(my_tree);
     printf("\r\n");
-    BTree_Index(&my_tree);
-    printf("\r\n");
+//    BTree_Index(&my_tree);
+//    printf("\r\n");
     //2.中序
     /*
     my_tree = BTree_Mid_Init(&my_tree);
@@ -34,5 +34,8 @@ int main(void)
     BTree_Last_Vist(my_tree);
     printf("\r\n");
     */
+    BTree_Change_RL(&my_tree);
+    BTree_Order_Vist(my_tree);
+    printf("\r\n");
     return 0;
 }

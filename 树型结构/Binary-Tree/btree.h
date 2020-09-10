@@ -32,5 +32,5 @@ BNode BTree_Last_Init(BNode *obj);
 void BTree_Last_Vist(BNode obj);
 
 void BTree_Index(BNode *obj);
-
+int BTree_Change_RL(BNode *obj);
 #endif

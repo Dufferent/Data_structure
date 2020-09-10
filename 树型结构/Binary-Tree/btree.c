@@ -130,6 +130,28 @@ void BTree_Last_Vist(BNode obj)
     }
 }
 
+//交换左右子树
+int BTree_Change_RL(BNode *obj)
+{
+	BNode op;
+	BNode ts;
+	op = (*obj);
+	if(op->lchild && op->rchild)
+	{
+		ts = op->lchild;
+		op->lchild = op->rchild;
+		op->rchild = ts;
+	}
+	else
+		return 0;		
+	ts = NULL;
+	free(ts);
+	BTree_Change_RL(&op->lchild);
+	BTree_Change_RL(&op->rchild);
+	op = NULL;
+	free(op);
+	return 1;
+}
 
 
 
