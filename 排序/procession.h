@@ -12,4 +12,5 @@ void Insert_Process(Element_Type *array);
 void Shell_Sort(Element_Type *array);
 void Quick_Sort(Element_Type *array,int low ,int high);
 void Sample_Sort(Element_Type *array);
+void cocktail_store(Element_Type *array);
 #endif

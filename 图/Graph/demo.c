@@ -11,8 +11,10 @@ int main(void)
     printf("Please input Start place!\r\n");
     scanf("%d",&Start_addr);
     getchar();
+    printf("DFS:\r\n");
     DFS(my_graph,Start_addr);
     printf("\r\n");
+    printf("WFS:\r\n");
     WFS(my_graph,Start_addr);
     printf("\r\n");
     return 0;

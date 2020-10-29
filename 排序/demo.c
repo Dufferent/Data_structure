@@ -11,6 +11,7 @@ int main(void)
     //Shell_Sort(array);
     //Quick_Sort(array,0,Get_Len(array)-1);
     //Sample_Sort(array);
+    cocktail_store(array);
     ARRAY_SHOW(array);
 
     return 0;

@@ -213,10 +213,11 @@ void DFS(GNode obj,int vertex)
         {
             if(obj->table[vertex][i] == 1)
             {
-                printf("%d->%d\r\n",vertex,i);//访问地点
-                DFS(obj,i);
+                printf(" %d->%d ",vertex,i);//访问地点
+		DFS(obj,i);
             }
         }
+	printf("\r\n");
     }
 }
 
@@ -231,13 +232,14 @@ void WFS(GNode obj,int vertex)
         {
             if(obj->table[vertex][i] == 1)
             {
-                printf("%d->%d\r\n",vertex,i);//访问地点
+                printf(" %d->%d ",vertex,i);//访问地点
                 remain[ct] = i;
                 ct++;
             }
         }
-        for(int i=0;i<=ct-1;i++)
+        for(int i=ct-1;i>=0;i--)
             WFS(obj,remain[i]);
+    	printf("\r\n");
     }
 }
 

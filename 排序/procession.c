@@ -4,7 +4,7 @@
 #include "fcntl.h"
 #include "sys/types.h"
 #include "string.h"
-#include <procession.h>
+#include "procession.h"
 //1.获取数组长度
 int Get_Len(Element_Type *array)
 {
@@ -202,7 +202,46 @@ void Sample_Sort(Element_Type *array)
 }
 //8.堆排序
 //9.归并排序
+//10.鸡尾酒排序
+void cocktail_store(Element_Type *array)
+{
+	int len = Get_Len(array);
+	for(int i=0;i<len;i++)
+	{
+		static int flag = 1;
+		if(flag)
+		{
+			//[正向冒泡]
+			for(int j=len-1-i/2;j>i/2;j--)
+			{
+				Element_Type tmp;
+				if(array[j]<array[j-1])
+				{	
+					tmp = array[j-1];
+					array[j-1] = array[j];
+					array[j] = tmp;
+					flag = 0;
+				}
+			}
+		}
+		else
+		{
+			for(int k=i/2+1;k<len-i/2-1;k++)
+			{
+				if(array[k]>array[k+1])
+				{
+					Element_Type tmp;
+					tmp = array[k+1];
+					array[k+1] = array[k];
+					array[k] = tmp;
+					flag = 1;
+				}
+			}
+		}
 
+	}
+
+}
 
 
 
