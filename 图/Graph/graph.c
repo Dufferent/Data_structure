@@ -8,6 +8,7 @@
 #include "sys/types.h"
 
 /* operations */
+#define UnLimit 100
 
 void Graph_Init(GRAPH *obj)
 {
@@ -82,10 +83,10 @@ void View_Graph_By_Table(GRAPH obj,int **table)
 void DFS(GRAPH obj,int sver)
 {
     for(int j=0;j<obj.vernum;j++)
-        tmp_table[j][sver] = 0; 
+        tmp_table[j][sver] = UnLimit; 
     for(int i=0;i<obj.vernum;i++)
     {
-        if(tmp_table[sver][i] != 0)
+        if(tmp_table[sver][i] != UnLimit)
         {
             printf("[now:%d] -> [dst:%d]\r\n",sver,i);
             DFS(obj,i);
@@ -98,24 +99,27 @@ void BFS(GRAPH obj,int sver)
 {
     int actver = 0;
     int nextver[64];
-    for(int j=0;j<obj.vernum;j++)
-         tmp_table[j][sver] = 0; 
-    for(int i=0;i<obj.vernum;i++)
+    int m = 0;
+    while(m<obj.vernum)
     {
-        if(tmp_table[sver][i] != 0)
+        for(int j=0;j<obj.vernum;j++)
+            tmp_table[j][sver] = UnLimit; 
+        for(int i=0;i<obj.vernum;i++)
         {
-            nextver[actver] = i;
-            actver++;
-            printf("[now:%d] -> [dst:%d]\r\n",sver,i);
-            for(int j=0;j<obj.vernum;j++)
-                tmp_table[j][i] = 0; 
+            if(tmp_table[sver][i] != UnLimit)
+            {
+                nextver[actver] = i;
+                actver++;
+                printf("[now:%d] -> [dst:%d]\r\n",sver,i);
+                for(int j=0;j<obj.vernum;j++)
+                    tmp_table[j][i] = UnLimit; 
+            }
         }
+            sver = nextver[m++];
     }
-    for(int i=0;i<actver;i++)
-        BFS(obj,nextver[i]);
 }
 
-#define UnLimit 100
+
 int mypow(int x)     //base = 2
 {
     int ret = 1;
@@ -143,8 +147,8 @@ void DjTsl(GRAPH obj,int vertex)
     flag[vertex] = 1;
     memset(shortest,UnLimit,sizeof(int)*64);
 
-    // while(!flag_judge(obj.vernum,flag))
-    // {
+    while(!flag_judge(obj.vernum,flag))//判断已使用贪心纳入的节点
+    {
         for(int i=0;i<obj.vernum;i++)
         {
             int route[64] = {0};
@@ -153,15 +157,15 @@ void DjTsl(GRAPH obj,int vertex)
                 route[k] = obj.edage[i][k];    
                 if( (i != vertex) && flag[i]) 
                     route[k] += shortest[i];
-                if(shortest[k]>route[k])
+                if(shortest[k]>route[k] && flag[i])
                     shortest[k] = route[k];
                 //printf("now:%4d pre:%4d ",shortest[k],route[k]);
             }
             //printf("\r\n");
             /*
             *   从vertex出发经过由贪心算法求得的k
-            *   再从k顶点出发更新vertex各个节点的距离
-            *   直到算法计算出vertex到所有定点的最短路径
+            *   再从k顶点出发更新vertex到各个节点的距离
+            *   直到算法计算出vertex到所有顶点的最短路径
             */
             int tmp = 100;
             for(int j=0;j<obj.vernum;j++)
@@ -183,7 +187,7 @@ void DjTsl(GRAPH obj,int vertex)
             // printf("\r\n");
         }
         shortest[vertex] = 0;   //出发点到本身的最短距离为零
-    // }
+    }
     for(int i=0;i<obj.vernum;i++)
         printf("[myvertex<%d> to(2) verte<%d> shortest --- [%d]]\r\n",vertex,i,shortest[i]);
 }
